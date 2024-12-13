@@ -30,7 +30,6 @@ import { SignUpRequest } from './requests/sign-up.request';
 import { SignUpResponse } from './responses/sign-in.response';
 import { SignInResponse } from './responses/sign-up.response';
 import { AuthService } from './services/auth.service';
-
 import { HashService } from './services/hash.service';
 import { SessionService } from './services/session.service';
 import { UsersService } from './services/users.service';
