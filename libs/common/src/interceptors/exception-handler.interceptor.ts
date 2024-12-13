@@ -1,4 +1,5 @@
 import { ExpressRequest } from '@common/common/types/context.type';
+import { stringify } from '@common/common/utils/stringify.util';
 import {
   CallHandler,
   ExecutionContext,
@@ -22,9 +23,7 @@ export class ExceptionInterceptor implements NestInterceptor {
         const statusCode = this.getStatusCode(error);
         const cause = this.getCause(error);
 
-        request.logger.error(
-          JSON.stringify({ message, statusCode, cause }, null, 2),
-        );
+        request.logger.error(stringify({ message, statusCode, cause }));
 
         throw new HttpException(
           {

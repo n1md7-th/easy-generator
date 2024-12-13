@@ -21,12 +21,6 @@
     "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
     "paths": {
-      "@auth/auth": [
-        "libs/auth/src"
-      ],
-      "@auth/auth/*": [
-        "libs/auth/src/*"
-      ],
       "@common/common": [
         "libs/common/src"
       ],

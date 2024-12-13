@@ -7,7 +7,7 @@ export type ExpressRequest = Request & {
   logger: ConsoleLogger;
   requestId: string;
   sessionId: string;
-  auth?: {
-    user: AuthClaims;
+  auth: {
+    user: AuthClaims | null;
   };
 };

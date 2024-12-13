@@ -1,5 +1,6 @@
 import { Env } from '@common/common/env/env.static';
 import { ExpressRequest } from '@common/common/types/context.type';
+import { stringify } from '@common/common/utils/stringify.util';
 import {
   CallHandler,
   ExecutionContext,
@@ -48,9 +49,7 @@ export class RequestInterceptor implements NestInterceptor {
       request.logger.log(
         `${text.started} ${method} ${originalUrl} - ${userAgent} ${ip}`,
       );
-      request.logger.log(
-        `${text.payload} ${JSON.stringify(request.body, null, 2)}`,
-      );
+      request.logger.log(`${text.payload} ${stringify(request.body)}`);
     }
 
     return next.handle();

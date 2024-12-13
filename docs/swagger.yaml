@@ -1,0 +1,189 @@
+openapi: 3.0.0
+paths:
+  /api/health:
+    get:
+      operationId: HealthController_check
+      parameters: []
+      responses:
+        '200':
+          description: Check the status of the service.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  uptime:
+                    type: string
+      tags:
+        - Health
+  /api/v1/sign-up:
+    post:
+      operationId: AuthController_signUp_v1
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignUpRequest'
+      responses:
+        '201':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignUpResponse'
+        '400':
+          description: Returns BAD_REQUEST when the payload is invalid or malformed.
+        '409':
+          description: Returns CONFLICT when the user already exists.
+      tags: &ref_0
+        - Authentication
+  /api/v1/sign-in:
+    post:
+      operationId: AuthController_signIn_v1
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignInRequest'
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignInResponse'
+        '400':
+          description: Returns BAD_REQUEST when the payload is invalid or malformed.
+        '401':
+          description: Returns UNAUTHORIZED when the credentials are invalid
+        '404':
+          description: Returns NOT_FOUND when the user does not exist.
+        '422':
+          description: Returns UNPROCESSABLE_ENTITY when the user is not active
+      tags: *ref_0
+  /api/v1/sign-out:
+    post:
+      operationId: AuthController_signOut_v1
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignOutRequest'
+      responses:
+        '202':
+          description: Returns ACCEPTED when the sign out request is successful
+      tags: *ref_0
+info:
+  title: easy-generator
+  description: Easy generator
+  version: 0.0.1
+  contact: {}
+tags: []
+servers: []
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+      name: JWT
+      description: Enter JWT auth token
+      in: header
+  schemas:
+    SignUpRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username of the user
+          example: john
+        password:
+          type: string
+          description: The password of the user
+          example: password
+        confirmPassword:
+          type: string
+          description: The password confirmation of the user
+          example: password
+      required:
+        - username
+        - password
+        - confirmPassword
+    SignUpResponse:
+      type: object
+      properties:
+        uuid:
+          type: string
+          example: d0f5c2c0-0f8a-4f1a-8f0a-2b5b8a0e1c1e
+        username:
+          type: string
+          example: user-123
+      required:
+        - uuid
+        - username
+    SignInRequest:
+      type: object
+      properties:
+        username:
+          type: string
+          description: The username of the user
+          example: john007
+        password:
+          type: string
+          description: The password of the user
+          example: P@ssw0rd
+      required:
+        - username
+        - password
+    TokenSchema:
+      type: object
+      properties:
+        value:
+          type: string
+          example: aaa.bbb.ccc
+        expiresInSec:
+          type: number
+          example: 3600
+          description: The time in seconds until the token expires
+      required:
+        - value
+        - expiresInSec
+    SignInResponse:
+      type: object
+      properties:
+        accessToken:
+          $ref: '#/components/schemas/TokenSchema'
+        refreshToken:
+          $ref: '#/components/schemas/TokenSchema'
+        roles:
+          type: array
+          example:
+            - Admin
+            - User
+            - Guest
+          items:
+            type: string
+            enum:
+              - Admin
+              - User
+              - Guest
+      required:
+        - accessToken
+        - refreshToken
+        - roles
+    SignOutRequest:
+      type: object
+      properties:
+        refreshToken:
+          type: string
+          description: Deactivates the refresh token of the user
+      required:
+        - refreshToken
