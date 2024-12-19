@@ -1,7 +1,39 @@
+# Easy generator
 
-## Description
+# Quickstart
 
-Easy generator backend
+Clone the repository
+
+Go to the root directory of the project and run the following command
+
+```bash
+$ docker compose up
+```
+
+Dependencies
+- Docker
+- Docker Compose
+
+- Frontend is running at http://localhost:8080
+- Frontend is using React and Bootstrap
+- Validations are performed at backend so the FE is not doing any validations but displays errors thrown from backend
+- It has a simple sign-in, sign-up and sign-out flow.
+
+## Frontend
+
+Dependencies
+- Node
+- Yarn
+
+## Project setup
+
+```bash
+$ yarn install
+$ yarn run dev
+```
+
+
+## Backend
 
 Dependencies
 - Mongodb
@@ -9,16 +41,12 @@ Dependencies
 - Node
 - Docker
 
-## Run using docker
-
-```bash
-$ docker-compose up
-```
-
-- Server is running at http://localhost:8000
-- Swagger is running at http://localhost:8000/docs
-
-Project is using JWT for authentication.
+About the project
+- Project is using JWT for authentication.
+- It has some unit tests for the auth verification.
+- Project has Swagger documentation.
+- It has custom password validators for password strength.
+- Sign-in, sign-up and sign-out flows are implemented.
 
 
 ## Project setup
@@ -40,6 +68,7 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
+
 ## Run tests
 
 ```bash
@@ -57,5 +86,6 @@ $ yarn run test:cov
 
 - Add redis store for refresh token invalidation instead of local in-memory store
 - Change secret based HMAC to RSA based JWT signing
+- Implement refresh token endpoint
 
 

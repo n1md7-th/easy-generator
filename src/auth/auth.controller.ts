@@ -72,14 +72,14 @@ export class AuthController {
       payload.password,
     );
     const userEntity = await this.usersService.create(
-      payload.username,
+      payload.email,
       hashedPassword,
       [RoleEnum.User, RoleEnum.Guest],
     );
 
     return SignUpResponse.from({
       uuid: userEntity.uuid,
-      username: userEntity.username,
+      email: userEntity.email,
     });
   }
 
@@ -100,7 +100,7 @@ export class AuthController {
     description: 'Returns UNPROCESSABLE_ENTITY when the user is not active',
   })
   async signIn(@Body() payload: SignInRequest) {
-    const user = await this.usersService.getByUsername(payload.username);
+    const user = await this.usersService.getByEmail(payload.email);
 
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');

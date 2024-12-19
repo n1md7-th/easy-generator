@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsAscii,
+  IsEmail,
   IsNotEmpty,
   IsString,
   MaxLength,
@@ -8,15 +9,13 @@ import {
 } from 'class-validator';
 
 export class SignInRequest {
-  @IsAscii()
-  @IsString()
-  @MinLength(4)
-  @MaxLength(32)
+  @IsEmail()
+  @MaxLength(128)
   @ApiProperty({
-    description: 'The username of the user',
-    example: 'john007',
+    description: 'An email of the user',
+    example: 'john007@doe.com',
   })
-  username: string;
+  email: string;
 
   @IsAscii()
   @IsString()

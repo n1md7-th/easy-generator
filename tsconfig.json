@@ -27,6 +27,6 @@
       "@common/common/*": [
         "libs/common/src/*"
       ]
-    }
+    },
   }
 }

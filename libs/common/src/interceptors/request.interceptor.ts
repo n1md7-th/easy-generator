@@ -17,7 +17,7 @@ export class RequestInterceptor implements NestInterceptor {
     const request = context.switchToHttp().getRequest<ExpressRequest>();
     const response = context.switchToHttp().getResponse();
 
-    const whiteListedPaths = ['health', 'docs', 'swagger-ui'];
+    const whiteListedPaths = ['health', 'docs'];
     const isWhiteListed = whiteListedPaths.some((path) =>
       request.url.includes(path),
     );

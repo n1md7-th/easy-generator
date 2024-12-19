@@ -101,20 +101,20 @@ components:
     SignUpRequest:
       type: object
       properties:
-        username:
+        email:
           type: string
-          description: The username of the user
-          example: john
+          description: An email of the user
+          example: john007@doe.com
         password:
           type: string
           description: The password of the user
-          example: password
+          example: P@ssw0rd
         confirmPassword:
           type: string
           description: The password confirmation of the user
           example: password
       required:
-        - username
+        - email
         - password
         - confirmPassword
     SignUpResponse:
@@ -123,25 +123,21 @@ components:
         uuid:
           type: string
           example: d0f5c2c0-0f8a-4f1a-8f0a-2b5b8a0e1c1e
-        username:
-          type: string
-          example: user-123
       required:
         - uuid
-        - username
     SignInRequest:
       type: object
       properties:
-        username:
+        email:
           type: string
-          description: The username of the user
-          example: john007
+          description: An email of the user
+          example: john007@doe.com
         password:
           type: string
           description: The password of the user
           example: P@ssw0rd
       required:
-        - username
+        - email
         - password
     TokenSchema:
       type: object

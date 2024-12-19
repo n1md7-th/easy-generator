@@ -18,9 +18,6 @@ export class SignUpResponse {
   })
   uuid!: string;
 
-  @ApiProperty({ type: 'string', example: 'user-123' })
-  username!: string;
-
   constructor(payload: Partial<SignUpResponse>) {
     Object.assign(this, payload);
   }

@@ -11,10 +11,6 @@ export class UsersService {
     @InjectModel(User.name) private readonly userModel: Model<User>,
   ) {}
 
-  async getByUsername(username: string) {
-    return await this.userModel.findOne({ username }).exec();
-  }
-
   async getByEmail(email: string) {
     return await this.userModel.findOne({ email }).exec();
   }
@@ -23,16 +19,16 @@ export class UsersService {
     return await this.userModel.findOne({ uuid }).exec();
   }
 
-  async create(username: string, password: string, roles: RoleEnum[]) {
-    if (await this.getByUsername(username)) {
+  async create(email: string, password: string, roles: RoleEnum[]) {
+    if (await this.getByEmail(email)) {
       throw new ConflictException(
-        `User with username "${username}" already exists`,
+        `User with the email "${email}" already exists`,
       );
     }
 
     return this.userModel.create({
       uuid: randomUUID(),
-      username,
+      email,
       password,
       roles,
     });

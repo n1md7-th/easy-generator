@@ -10,10 +10,7 @@ export class User extends Document {
   uuid!: string;
 
   @Prop({ required: true })
-  username!: string;
-
-  @Prop({ required: false })
-  email?: string;
+  email: string;
 
   @Prop({ required: true })
   password!: string;
